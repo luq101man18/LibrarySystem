@@ -1,0 +1,5 @@
+calculusReveal : Straged : Math : 5 : 4
+Bobby : Fischer : Chess : 2 : 1
+peace : desto : philossphy : 3 : 7
+algorithms : cole : ComputerScience : 4 : 8
+
