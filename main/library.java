@@ -1,34 +1,114 @@
 package main;
+import java.util.EmptyStackException;
 import java.util.HashMap;
 import java.io.FileWriter;
+import java.io.IOException;
 import java.io.BufferedWriter;
 import java.util.Scanner;
 import java.io.PrintWriter;
 import java.nio.file.Files;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.Map;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.nio.file.*;
-
+import java.util.NoSuchElementException;
 public class library {
-    book[] listBooks;
-    String file = "book.txt";
-    String bookName;
-    String author;
-    String catagory;
-    String id;
+    
+   // user person = new user(); // for the logout function
+    static book[]  listBooks;
+
+
+    static String file = "book.txt";
+    String bookName = "";
+    String author = "";
+    String catagory = "";
+    String id = "";
     int availability;
+    static Map <String, book>  borrowedListBooks = new HashMap<>();
+    Map <String, String> borrowedBooksByUser= new HashMap<>();
     book newBook =  new book(bookName, author, catagory, id, availability);
-    File fileBook = new File(file);
+    static File fileBook = new File(file);
     int flag;
-    int numberLines;
-    Map<String, book> borrowedListBooks = new HashMap<>();
+    int  numberLines;
+    int Bflag= 0;
+
     // was added to get the path of the file to count the lines
     Path filePath = Paths.get(file);
+    
+    public void libraryMainOptions(){
 
+        System.out.println("\n\n1) add a book \n2) list all the books \n3) borrow book \n4) return book \n5) logout \n6) EXIT\n\n");
+        Scanner input = new Scanner(System.in);
+        int option= 0;
+        try{
+            if(input.hasNextLine()){
+                option = input.nextInt();
+            }
+            
 
-    public void readFileToListBooks(){
+            System.out.println("\n");
+            
+            if (option == 1){
+
+                addBook(); //  make it just eligble to the librarain
+
+                libraryMainOptions();
+            }
+            else if (option == 2){
+                
+                listAllTheBooks();
+        
+                libraryMainOptions();
+            }
+
+            else if(option == 3){
+
+                borrowBook();
+
+                libraryMainOptions();
+            }
+            else if(option ==4){
+
+                returnBook(); 
+
+                libraryMainOptions();
+
+            }
+            else if(option == 5){
+                
+
+            }else if(option == 6){
+
+                System.exit(0);
+            }
+            else{
+
+                System.out.printf("the option 1-4 if you want you entered: %d, if you want to termiante the program press 0 otherwise press 1: ", option);
+                int executer = input.nextInt();
+
+                if (executer == 0){
+
+                    System.exit(1);
+                    
+                }
+                else{
+
+                    libraryMainOptions();
+
+                }
+            } 
+
+        }catch(NoSuchElementException elementException){
+                System.err.println( "Invalid input. Please try again." );
+                input.nextInt();
+        }
+
+        //input.close();
+    }
+
+    public  void readFileToListBooks(){
 
         try{
             // why long ??
@@ -41,40 +121,38 @@ public class library {
 
             BufferedReader buffR = new BufferedReader(new FileReader(fileBook));
             String currentLine;
-            String bookName = "";
-            String author;
-            String catagory;
-            String id;
-            int availability;
-            int counter = 0;
+            String bookName1;
+            String author1;
+            String catagory1;
+            String id1;
+            int availability1 = 0;
+            int counter1 = 0;
             String arr[];
 
             while((currentLine = buffR.readLine()) != null) {
                 
                 arr = currentLine.split(" : ");
-                bookName = arr[0];
-                author = arr[1];
-                catagory = arr[2];
-                id = arr[3];
-                availability = Integer.parseInt(arr[4]);
+                bookName1 = arr[0];
+                author1 = arr[1];
+                catagory1 = arr[2];
+                id1 = arr[3];
+                availability1 = Integer.parseInt(arr[4]);
             
 
-                newBook.setBookInfo(bookName, author, catagory, id, availability);
+                newBook.setBookInfo(bookName1, author1, catagory1, id1, availability1);
              
-                listBooks[counter] = new book(newBook.bookName,newBook.author, newBook.catagory, newBook.id, newBook.availability);
-                counter++;
+                listBooks[counter1] = new book(newBook.bookName,newBook.author, newBook.catagory, newBook.id, newBook.availability);
+                counter1++;
             }
 
-            System.out.println(listBooks.length);
+            System.out.println();
 
-        }catch(Exception e){}
+            buffR.close();
+        }catch(Exception e){
+            System.out.println("file is empty");
+        }
     }
-    public void libraryMain(){
-        System.out.println("\nWelcome to the library\n");
-        System.out.println("\nPlease choose from the follwoing:\n");
-        System.out.println("1) add a book \n2) list all the books \n3) borrow book \n4) return book \n5) EXIT\n");
-        libraryMainOptions();
-    }
+
     public void addBook(){
         System.out.println("\n-----------------------\n");
         System.out.println("\nYou can add a book here\n");
@@ -89,125 +167,56 @@ public class library {
 
             printW.println(book);
             printW.flush();
-            input.close();
+            //input.close();
             printW.close();
 
             System.out.println("\n-----------------------\n");
             System.out.println("\nBOOK WAS ADDED\n");
             System.out.println("\n-----------------------\n");
             System.out.println("\nreturn to main\n");
-            libraryMain();
+          //  libraryMainOptions();
         }catch(Exception e){}
-
     };
-    public void libraryMainOptions(){
-        Scanner input = new Scanner(System.in);
-       
-        
-        int option  = input.nextInt();
-        System.out.println("\n");
-        
-        if (option == 1){
-
-            addBook(); //  make it just eligble to the librarain
-
-            libraryMain();
-        }
-        else if (option == 2){
-            
-            listAllTheBooks();
-     
-            libraryMain();
-        }
-
-        else if(option == 3){
-
-            borrowBook();
-
-            libraryMain();
-        }
-        else if(option ==4){
-
-            returnBook(); 
-
-            libraryMain();
-
-        }
-        else if(option == 5){
-            System.exit(0);
-        }
-        else{
-
-            System.out.printf("the option 1-4 if you want you entered: %d, if you want to termiante the program press 0 otherwise press 1: ", option);
-            int executer = input.nextInt();
-
-            if (executer == 0){
-                System.exit(1);
-            }
-            else{
-                libraryMainOptions();
-            }
-        }
-        input.close();
-    }
     public void listAllTheBooks(){
-        
+        try{
         for(int counter2 = 0; counter2 < listBooks.length; counter2++){
             
             String book = String.valueOf(listBooks[counter2]);
             System.out.println(book);
         }
+        }catch(Exception e){}
         
     }
     public void borrowBook(){
-        Scanner input = new Scanner(System.in);
-        int Bflag= 0;
-        System.out.println(("enter the name of the book: \n"));
-        String bookName = input.next();
+        String bookName = "";
+        bookName = gettingBookNameToBorrow(bookName);
 
-        for(int counter3  = 0; counter3<listBooks.length; counter3++){
-            String bookL = String.valueOf(listBooks[counter3].bookName);
-            if (bookL.equals(bookName)){
+        for(int counter3 = 0; counter3<listBooks.length; counter3++){
+
+            String bookNameAsString = String.valueOf(listBooks[counter3].bookName);
+            if (bookNameAsString.equals(bookName)){
                 if(listBooks[counter3].availability > 0){
-                    borrowedListBooks.put(bookName, listBooks[counter3]);
+                    // check if the book is borrowed
+                    checkBorrowedBook(bookName, listBooks[counter3].id);
+                    // add book to the borrowed List 
+                    borrowedListBooks.put(listBooks[counter3].id, listBooks[counter3]);
+                    // keep track of the borrowed book
                     listBooks[counter3].availability--;
                     System.out.println("\nBook is borrowed\n");
                     Bflag = 1;
                 }else{
                     System.out.printf("\nAll the %s books are borrowed now, sorry for the inconvenience\n", listBooks[counter3].bookName);
-                    libraryMain();
                 }
             }   
         }
         if (Bflag == 0){
             System.out.println("\nbook isn't available\n");
+            borrowBook();
         }
+
+        Bflag = 0;
     }
-    public void lookForBook(){
-        try{
-        
-        Scanner source  = new Scanner( new File(file));
 
-        int counter2 = 0;
-        while (source.hasNextLine()){
-
-            String line = source.nextLine();
-
-            //System.out.println(line);
-            String[] arr = line.split(" : ");
-            String bookName = arr[0];
-            String author = arr[1];
-            String catagory = arr[2];
-            String id = arr[3];
-            listBooks[counter2] = new book(bookName, author, catagory, id, availability);
-            counter2++;
-        }   
-        
-    }catch(Exception e){}
-
-
-
-    }
     public void returnBook(){
         Scanner input = new Scanner(System.in);
 
@@ -216,10 +225,11 @@ public class library {
 
         String nameOfBook = input.next();
         int Rflag = 0;
-        for(int counter4 = 0; counter4 < numberLines; counter4++){
+        for(int counter4 = 0; counter4 < listBooks.length; counter4++){
             String bookL = String.valueOf(listBooks[counter4].bookName);
             if (bookL.equals(nameOfBook)){
                 borrowedListBooks.remove(bookL);
+             //   user.borrowedBooksByUser.remove(person.getUsername());
                 listBooks[counter4].availability++;
                 System.out.println("\nBook is returned \n");
                 Rflag = 1;
@@ -231,7 +241,30 @@ public class library {
         }
 
     }
+    public void checkBorrowedBook(String bookName, String id){
+     
+        
+        if(borrowedListBooks.containsKey(id))
+        {
+            System.out.println("\n----- YOU ALREADY BORROWED THE BOOK! -----\n");
+            borrowBook();
+        }
+         /*if(id ==  user.borrowedBooksByUser.get(user.getUsername()))
+        {
+            System.out.println("\n----- YOU ALREADY BORROWED THE BOOK! Different user-----\n");
+            borrowBook();
+           // libraryMainOptions();
 
+        }*/
     
-    // To print something different when you call System.out.println(myObject), you must override the toString() method in your own class. Here's a simple example:
+    }
+    
+    // To print something different when you call System.out.println(myObject), you must override the toString() method in your own class.
+
+    public String gettingBookNameToBorrow(String bookName){
+        Scanner input = new Scanner(System.in);
+        System.out.println(("enter the name of the book: \n"));
+        bookName = input.next();
+        return bookName;
+    }
 }
