@@ -13,11 +13,12 @@ import java.util.Map;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.nio.file.*;
+import java.util.Set;
 import java.util.NoSuchElementException;
 public class library {
     
    // user person = new user(); // for the logout function
-    static book[]  listBooks;
+    book[]  listBooks;
 
 
     static String file = "book.txt";
@@ -26,8 +27,8 @@ public class library {
     String catagory = "";
     String id = "";
     int availability;
-    static Map <String, book>  borrowedListBooks = new HashMap<>();
-    Map <String, String> borrowedBooksByUser= new HashMap<>();
+    Map <String, book>  borrowedListBooks = new HashMap<>();
+    Set <String> setOfKeysFromBorrwoedListBooks = borrowedListBooks.keySet();
     book newBook =  new book(bookName, author, catagory, id, availability);
     static File fileBook = new File(file);
     int flag;
@@ -37,77 +38,6 @@ public class library {
     // was added to get the path of the file to count the lines
     Path filePath = Paths.get(file);
     
-    public void libraryMainOptions(){
-
-        System.out.println("\n\n1) add a book \n2) list all the books \n3) borrow book \n4) return book \n5) logout \n6) EXIT\n\n");
-        Scanner input = new Scanner(System.in);
-        int option= 0;
-        try{
-            if(input.hasNextLine()){
-                option = input.nextInt();
-            }
-            
-
-            System.out.println("\n");
-            
-            if (option == 1){
-
-                addBook(); //  make it just eligble to the librarain
-
-                libraryMainOptions();
-            }
-            else if (option == 2){
-                
-                listAllTheBooks();
-        
-                libraryMainOptions();
-            }
-
-            else if(option == 3){
-
-                borrowBook();
-
-                libraryMainOptions();
-            }
-            else if(option ==4){
-
-                returnBook(); 
-
-                libraryMainOptions();
-
-            }
-            else if(option == 5){
-                
-
-            }else if(option == 6){
-
-                System.exit(0);
-            }
-            else{
-
-                System.out.printf("the option 1-4 if you want you entered: %d, if you want to termiante the program press 0 otherwise press 1: ", option);
-                int executer = input.nextInt();
-
-                if (executer == 0){
-
-                    System.exit(1);
-                    
-                }
-                else{
-
-                    libraryMainOptions();
-
-                }
-            } 
-
-        }catch(NoSuchElementException elementException){
-                System.err.println( "Invalid input. Please try again." );
-                input.nextInt();
-        }
-
-        //input.close();
-    }
-
     public  void readFileToListBooks(){
 
         try{

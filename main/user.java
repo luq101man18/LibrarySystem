@@ -17,7 +17,7 @@ public class user {
    
     library library = new library();
     String userFile = "user.txt";
-    static String  userName; 
+    String  userName; 
     String userPassword;
     String address;
     int phoneNumber;
@@ -62,7 +62,7 @@ public class user {
         this.phoneNumber = phoneNumber;
     }
 
-    public static String getUsername(){
+    public String getUsername(){
         return userName;
     }
 
@@ -81,7 +81,7 @@ public class user {
         String bookFormat = String.format("%s : %s : %s : %s : %d", userName, userPassword, address, phoneNumber);
         return bookFormat;
     }
-
+/* 
     public void login(String name, String password){
 
         try{
@@ -113,7 +113,7 @@ public class user {
             /*if (flag == 1){
                 System.out.println("\nUSER LOGGED-IN SUCCESSFULLY\n");
                 flag = 0;
-            */
+            
             if(flag == 0){
                 System.out.println("\nUSER DOESN'T EXIST\n");
                 getUsernameAndPassword();
@@ -132,7 +132,7 @@ public class user {
         //List<String> values = new ArrayList<String>();
         values.add(getUsername());
         values.add(bookIDs);
-        //borrowedBooksByUser.put(getUsername(),values);  //  get name printting null
+        // borrowedBooksByUser.put(getUsername(),values);  //  get name printting null
         System.out.println(values);
         // clear all the borrowed books for the current user
         library.borrowedListBooks.clear();
@@ -165,7 +165,7 @@ public class user {
        
     }
 
-
+*/
     
     
 }
