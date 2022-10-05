@@ -37,7 +37,7 @@ public class library {
 
     // was added to get the path of the file to count the lines
     Path filePath = Paths.get(file);
-    
+
     public  void readFileToListBooks(){
 
         try{
@@ -159,7 +159,6 @@ public class library {
             String bookL = String.valueOf(listBooks[counter4].bookName);
             if (bookL.equals(nameOfBook)){
                 borrowedListBooks.remove(bookL);
-             //   user.borrowedBooksByUser.remove(person.getUsername());
                 listBooks[counter4].availability++;
                 System.out.println("\nBook is returned \n");
                 Rflag = 1;
@@ -179,17 +178,10 @@ public class library {
             System.out.println("\n----- YOU ALREADY BORROWED THE BOOK! -----\n");
             borrowBook();
         }
-         /*if(id ==  user.borrowedBooksByUser.get(user.getUsername()))
-        {
-            System.out.println("\n----- YOU ALREADY BORROWED THE BOOK! Different user-----\n");
-            borrowBook();
-           // libraryMainOptions();
-
-        }*/
     
     }
     
-    // To print something different when you call System.out.println(myObject), you must override the toString() method in your own class.
+    
 
     public String gettingBookNameToBorrow(String bookName){
         Scanner input = new Scanner(System.in);

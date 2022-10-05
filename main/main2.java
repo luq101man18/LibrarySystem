@@ -10,11 +10,6 @@ import java.util.List;
 import java.io.FileWriter;
 import java.io.BufferedWriter;
 import java.io.PrintWriter;
-// move login and logout out 
-// create user objects
-// file for each user to store books then read it when it's created
-// edit borrow function
-// 
 
 public class main2 {
     static library LibraryMain = new library();
@@ -25,7 +20,7 @@ public class main2 {
     int flag = 0;
 
     // ------------------------------------------- login ----------------------------
-    
+
     void getUsernameAndPassword(){
 
         String username = "";
@@ -87,6 +82,7 @@ public class main2 {
                     String idAsString = String.valueOf(LibraryMain.listBooks[counter3].id);
     
                     if (idAsString.equals(id)){
+                        LibraryMain.listBooks[counter3].availability--;
                         LibraryMain.borrowedListBooks.put(idAsString, LibraryMain.listBooks[counter3]);
                     }
                 }
