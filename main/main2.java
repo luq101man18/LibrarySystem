@@ -44,6 +44,7 @@ public class main2 {
 
        
     }
+    
     String findUserBookFile(String username){
         String userBookFile = "";
         try{
@@ -62,6 +63,7 @@ public class main2 {
         }
         return userBookFile;
     }
+    
     void checkPreviousBorrrowedBooksByUser(String username){
         
         try{
@@ -90,6 +92,7 @@ public class main2 {
 
         }
     }
+    
     void login(String name, String password){
 
         try{
@@ -127,7 +130,7 @@ public class main2 {
             }
             
             buffR.close();
-            
+
             flag = 0;
         }catch(Exception e){}
     }
