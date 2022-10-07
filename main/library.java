@@ -90,6 +90,7 @@ public class library {
 
         }catch(Exception e){}
     };
+    
     public void listAllTheBooks(){
         try{
         for(int counter2 = 0; counter2 < listBooks.length; counter2++){
@@ -100,6 +101,7 @@ public class library {
         }catch(Exception e){}
         
     }
+   
     public void borrowBook(){
         String bookName = "";
         bookName = gettingBookNameToBorrow(bookName);
@@ -164,6 +166,7 @@ public class library {
         }catch(Exception e){}
 
     }
+    
     public boolean checkBorrowedBook(String id){
         if(borrowedListBooks.containsKey(id))
         {
@@ -172,13 +175,13 @@ public class library {
         }
         return true;
     }
+    
     public String gettingBookNameToBorrow(String bookName){
         Scanner input = new Scanner(System.in);
         System.out.println(("enter the name of the book: \n"));
         bookName = input.next();
         return bookName;
     }
-
 
     public void openFileToWrite(File fileName, String line){
         try{
