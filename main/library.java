@@ -1,20 +1,16 @@
 package main;
-import java.util.EmptyStackException;
 import java.util.HashMap;
 import java.io.FileWriter;
-import java.io.IOException;
 import java.io.BufferedWriter;
 import java.util.Scanner;
 import java.io.PrintWriter;
 import java.nio.file.Files;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.util.Map;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.nio.file.*;
 import java.util.Set;
-import java.util.NoSuchElementException;
 public class library {
     
    // user person = new user(); // for the logout function
@@ -44,7 +40,7 @@ public class library {
             // why long ??
             long numOfLines = Files.lines(filePath).count();
             //casting
-            int lines = (int)numOfLines-1;
+            int lines = (int)numOfLines;
             numberLines = lines;
             //assigning 
             listBooks = new book[lines];
@@ -84,27 +80,14 @@ public class library {
     }
 
     public void addBook(){
-        System.out.println("\n-----------------------\n");
-        System.out.println("\nYou can add a book here\n");
-        System.out.println("Please enter the book info as detailed- EXAMPLE( name : author : catagory : id : availability): \n");
-        
+        messageToBeginAddBook();
         try{
-            FileWriter bookFile = new FileWriter(fileBook, true);
-            BufferedWriter BuffWrite = new BufferedWriter(bookFile);
-            PrintWriter printW = new PrintWriter(BuffWrite);
             Scanner input  = new Scanner(System.in);
             String book = input.nextLine();
+            openFileToWrite(fileBook, book);
 
-            printW.println(book);
-            printW.flush();
-            //input.close();
-            printW.close();
+            messageToEndAddBook();
 
-            System.out.println("\n-----------------------\n");
-            System.out.println("\nBOOK WAS ADDED\n");
-            System.out.println("\n-----------------------\n");
-            System.out.println("\nreturn to main\n");
-          //  libraryMainOptions();
         }catch(Exception e){}
     };
     public void listAllTheBooks(){
@@ -127,12 +110,14 @@ public class library {
             if (bookNameAsString.equals(bookName)){
                 if(listBooks[counter3].availability > 0){
                     // check if the book is borrowed
-                    checkBorrowedBook(bookName, listBooks[counter3].id);
                     // add book to the borrowed List 
-                    borrowedListBooks.put(listBooks[counter3].id, listBooks[counter3]);
-                    // keep track of the borrowed book
-                    listBooks[counter3].availability--;
-                    System.out.println("\nBook is borrowed\n");
+                    if(checkBorrowedBook((listBooks[counter3].id)) == true){
+                        borrowedListBooks.put(listBooks[counter3].id, listBooks[counter3]);
+                        // keep track of the borrowed book
+                        listBooks[counter3].availability--;
+                        System.out.println("\nBook is borrowed\n");
+                        
+                    }
                     Bflag = 1;
                 }else{
                     System.out.printf("\nAll the %s books are borrowed now, sorry for the inconvenience\n", listBooks[counter3].bookName);
@@ -141,7 +126,7 @@ public class library {
         }
         if (Bflag == 0){
             System.out.println("\nbook isn't available\n");
-            borrowBook();
+           // borrowBook();
         }
 
         Bflag = 0;
@@ -152,41 +137,75 @@ public class library {
 
         System.out.println("\nReturn book\n");
         System.out.println("\nwrite the name of the book down\n");
+        try{
+           
+            String nameOfBook = input.next();
+            int Rflag = 0;
 
-        String nameOfBook = input.next();
-        int Rflag = 0;
-        for(int counter4 = 0; counter4 < listBooks.length; counter4++){
-            String bookL = String.valueOf(listBooks[counter4].bookName);
-            if (bookL.equals(nameOfBook)){
-                borrowedListBooks.remove(bookL);
-                listBooks[counter4].availability++;
-                System.out.println("\nBook is returned \n");
-                Rflag = 1;
+            for(int counter4 = 0; counter4 < listBooks.length; counter4++){
+                String bookNameAsString = String.valueOf(listBooks[counter4].bookName);
+                String bookIdAsString = String.valueOf(listBooks[counter4].id);
+                
+                if (bookNameAsString.equals(nameOfBook)){
 
+                    if(borrowedListBooks.containsKey(bookIdAsString)){
+                        borrowedListBooks.remove(bookIdAsString);
+                     
+                        listBooks[counter4].availability++;
+                        System.out.println("\nBook is returned \n");
+                        Rflag = 1;
+                        break;
+                    }
+                }
             }
-        }
-        if(Rflag == 0){
-            System.out.println("\nBook wasn't found\n");
-        }
+            if(Rflag == 0){
+                System.out.println("\nBook wasn't found\n");
+            }
+        }catch(Exception e){}
 
     }
-    public void checkBorrowedBook(String bookName, String id){
-     
-        
+    public boolean checkBorrowedBook(String id){
         if(borrowedListBooks.containsKey(id))
         {
             System.out.println("\n----- YOU ALREADY BORROWED THE BOOK! -----\n");
-            borrowBook();
+            return false;
         }
-    
+        return true;
     }
-    
-    
-
     public String gettingBookNameToBorrow(String bookName){
         Scanner input = new Scanner(System.in);
         System.out.println(("enter the name of the book: \n"));
         bookName = input.next();
         return bookName;
     }
+
+
+    public void openFileToWrite(File fileName, String line){
+        try{
+            FileWriter bookFile = new FileWriter(fileName, true);
+            BufferedWriter BuffWrite = new BufferedWriter(bookFile);
+            PrintWriter printW = new PrintWriter(BuffWrite);
+            printW.println(line);
+            printW.flush();
+            printW.close();
+        }catch(Exception e){
+
+        }
+        
+    } 
+
+    public void messageToBeginAddBook(){
+        System.out.println("\n-----------------------\n");
+        System.out.println("\nYou can add a book here\n");
+        System.out.println("Please enter the book info as detailed- EXAMPLE( name : author : catagory : id : availability): \n");
+        
+    }
+
+    public void messageToEndAddBook(){
+        System.out.println("\n-----------------------\n");
+        System.out.println("\nBOOK WAS ADDED\n");
+        System.out.println("\n-----------------------\n");
+        System.out.println("\nreturn to main\n");
+    }
+
 }

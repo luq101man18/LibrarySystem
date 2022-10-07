@@ -4,9 +4,6 @@ import java.util.NoSuchElementException;
 import java.io.File;
 import java.io.BufferedReader;
 import java.io.FileReader;
-import java.util.Arrays;
-import java.util.ArrayList;
-import java.util.List;
 import java.io.FileWriter;
 import java.io.BufferedWriter;
 import java.io.PrintWriter;
@@ -115,7 +112,7 @@ public class main2 {
                         System.out.println("\nUSER LOGGED-IN SUCCESSFULLY\n");
                         
                         User = new user(userName, userPassword, address, phoneNumber);
-                
+                       
                         checkPreviousBorrrowedBooksByUser(User.userName+".txt");
                         flag = 1;
                         
@@ -130,7 +127,8 @@ public class main2 {
             }
             
             buffR.close();
-
+            
+            flag = 0;
         }catch(Exception e){}
     }
 

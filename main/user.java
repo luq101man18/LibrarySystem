@@ -1,11 +1,5 @@
 package main;
-import java.io.File;
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.lang.reflect.Array;
 import java.util.Map;
-import java.util.NoSuchElementException;
-import java.util.Scanner;
 import java.util.HashMap;
 import java.util.List;
 import java.util.ArrayList;
