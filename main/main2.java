@@ -16,7 +16,7 @@ public class main2 {
     String[] usersBookFile  = {"luqman.txt", "suliman.txt"};
     int flag = 0;
 
-    // ------------------------------------------- login ----------------------------
+
 
     void getUsernameAndPassword(){
 
@@ -48,10 +48,7 @@ public class main2 {
     String findUserBookFile(String username){
         String userBookFile = "";
         try{
-            //String userBookFile = "";
 
-            // search for the user book file
-            
             for(int counter = 0; counter < usersBookFile.length; counter++){
                 if (usersBookFile[counter].toString().equals(username)){
                     userBookFile = username;
@@ -67,7 +64,6 @@ public class main2 {
     void checkPreviousBorrrowedBooksByUser(String username){
         
         try{
-            // open the user book file and restore the data
 
             File userBooksFile = new File(findUserBookFile(username));
             BufferedReader buff = new BufferedReader(new FileReader(userBooksFile));
@@ -135,7 +131,7 @@ public class main2 {
         }catch(Exception e){}
     }
 
-    //-------------------------------------------- logout ----------------------------------------
+  
 
     public void logout(){
 
@@ -158,11 +154,12 @@ public class main2 {
         }
     }
    
-    // ----------------------------------- main -------------------------------------
+
 
     public static void main(String args[]){
-        
 
+
+        
         main2 mainLi = new main2(); 
         Scanner input = new Scanner(System.in);
         LibraryMain.readFileToListBooks();
@@ -183,7 +180,7 @@ public class main2 {
                 
                 if (option == 1){
     
-                    LibraryMain.addBook(); //  make it just eligble to the librarai
+                    LibraryMain.addBook(); 
                     
                 }
                 else if (option == 2){

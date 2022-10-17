@@ -13,7 +13,7 @@ import java.nio.file.*;
 import java.util.Set;
 public class library {
     
-   // user person = new user(); // for the logout function
+
     book[]  listBooks;
 
 
@@ -37,12 +37,12 @@ public class library {
     public  void readFileToListBooks(){
 
         try{
-            // why long ??
+          
             long numOfLines = Files.lines(filePath).count();
-            //casting
+  
             int lines = (int)numOfLines;
             numberLines = lines;
-            //assigning 
+    
             listBooks = new book[lines];
 
             BufferedReader buffR = new BufferedReader(new FileReader(fileBook));
@@ -111,11 +111,10 @@ public class library {
             String bookNameAsString = String.valueOf(listBooks[counter3].bookName);
             if (bookNameAsString.equals(bookName)){
                 if(listBooks[counter3].availability > 0){
-                    // check if the book is borrowed
-                    // add book to the borrowed List 
+   
                     if(checkBorrowedBook((listBooks[counter3].id)) == true){
                         borrowedListBooks.put(listBooks[counter3].id, listBooks[counter3]);
-                        // keep track of the borrowed book
+        
                         listBooks[counter3].availability--;
                         System.out.println("\nBook is borrowed\n");
                         
@@ -128,7 +127,7 @@ public class library {
         }
         if (Bflag == 0){
             System.out.println("\nbook isn't available\n");
-           // borrowBook();
+         
         }
 
         Bflag = 0;

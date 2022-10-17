@@ -6,8 +6,7 @@ public class book {
     String author;
     String catagory;
     int availability;
-    
-    // constructor
+
 
     book(){
         this.bookName = null;
