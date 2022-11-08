@@ -1,33 +1,38 @@
 package main;
 import java.util.Scanner;
-
 import java.util.NoSuchElementException;
 
 public class main2 extends dataBaseFunctions{
     static library LibraryMain = new library();
     static user person = new user();  
     encryption encrypt = new encryption();
-    String userFile = "user.txt";
-    String[] usersBookFile  = {"luqman.txt", "suliman.txt"};
     int flag = 0;
 
+    public void chooseLoginMethodMessage(){
+        System.out.println(
+            "\nDo want to create new account?\n"+
+            "\npress 1 if yes, 2 if you already have an account\n"
+        );
+    }
+    
     public void chooseLoginMethod(){
         connection = CreateConnection();
         Scanner option = new Scanner(System.in);
-        int mehtod = 0;
+        int method = 0;
         try {
-            System.out.println(
-                "\nDo want to create new account?\n"+
-                "\npress 1 if yes, 2 if you already have an account\n"
-            );
-            if(option.hasNextLine()) mehtod = Integer.parseInt(option.nextLine());
-    
-            if(mehtod == 1) register();
-            else if(mehtod == 2) getUsernameAndPassword();
-
+            chooseLoginMethodMessage();
+            if(option.hasNextLine()) method = Integer.parseInt(option.nextLine());
+            if(method == 1) register();
+            else if(method == 2) getUsernameAndPassword();
+            else{
+                chooseLoginMethod();
+            }
         }catch(NoSuchElementException elementException){
             System.err.println( "Invalid option. Please try again." );
-            option.next();
+            chooseLoginMethod();
+        }catch(NumberFormatException numberFormatException){
+            System.err.println( "Invalid option. Please try again." );
+            chooseLoginMethod();
         }
     }
     
@@ -47,7 +52,7 @@ public class main2 extends dataBaseFunctions{
             }
             Login(username, userpassword);
             return true;
-
+        
         }catch(NoSuchElementException elementException){
             System.err.println( "Invalid getUserInfo. Please try again." );
             getUserInfo.next();
@@ -105,27 +110,18 @@ public class main2 extends dataBaseFunctions{
 
     }
     
-
-    public static void main(String args[]){
-
-        main2 mainLi = new main2(); 
+    public void runMainPage(){
         Scanner input = new Scanner(System.in);
-        
-        mainLi.chooseLoginMethod();
-        LibraryMain.chooseLibraryStore();
-
-        while(true){
-            int option= 0;
+        int option= 0;
             System.out.println("\n\n1) add a book \n2) list all the books \n3) borrow book \n4) return book \n"+
                                 "5) list latest returned and borrowed books \n6) Logout \n"+
                                     "7) Change library \n8) EXIT\n\n");
             
             try{
                 if(input.hasNextLine()){
-                    option = input.nextInt();
+                    option = Integer.parseInt(input.nextLine());
                 }
                 
-    
                 System.out.println("\n");
                 
                 if (option == 1){
@@ -155,7 +151,7 @@ public class main2 extends dataBaseFunctions{
                 }
                 
                 else if(option == 6){
-                    mainLi.Logout();
+                    Logout();
 
                 }
                 else if(option == 7){
@@ -174,33 +170,28 @@ public class main2 extends dataBaseFunctions{
                     if(input.hasNextLine()){
                         executer = input.nextInt();
                     }
-    
-                    if (executer == 0){
-    
+                    if (executer == 0){  
                         System.exit(1);
-                        
                     }
-                    else{
-    
-                       
-    
-                    }
-                } 
-    
+                }
             }
             catch(NoSuchElementException elementException){
                 System.err.print( "Invalid input. Please try again." );
-                if(input.hasNextLine()){
-                    option = input.nextInt();
-                }
+                runMainPage();
             }catch(Exception e){
-                e.getMessage();
+                System.err.print( "Invalid input. Please try again." );
+                runMainPage();
             }
+    }
+    public static void main(String args[]){
+        main2 mainLi = new main2(); 
     
+        mainLi.chooseLoginMethod();
+        LibraryMain.chooseLibraryStore();
+
+        while(true){
+            mainLi.runMainPage();
         }
-
-
-    
     }
         
 

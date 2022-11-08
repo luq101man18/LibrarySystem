@@ -86,18 +86,18 @@ public class book {
                 id = Integer.parseInt(input.nextLine());
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            setBookTitle();
         }
     }
     public void setBookTitle(){
        try {
             System.out.println("Enter the book title:\n");
             if(input.hasNextLine()){
-                bookName = input.next();
-                input.nextLine();
+                bookName = input.nextLine();
+               
             }
        } catch (Exception e) {
-        e.printStackTrace();
+        setBookTitle();
        }
     }
     public void setBookAuthor(){
@@ -107,7 +107,7 @@ public class book {
                 author = input.nextLine();
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            setBookAuthor();
         }
     }
     public void setBookCatagory(){
@@ -117,7 +117,7 @@ public class book {
                 catagory = input.nextLine();
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            setBookCatagory();
         }
     }
     

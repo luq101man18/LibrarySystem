@@ -37,12 +37,13 @@ public class library extends libraryStore {
         boolean bookCondition = false;
 
         try {
-            System.out.println("choose book from the list: \n");
-            int option  = input.nextInt();
+            System.out.println("choose book from the list by typing the id: \n");
+            int option  = Integer.parseInt(input.nextLine());
             setInfoOfBook(option);
             checkingBook( userID, id_store, currentBook.id, bookCondition);
 
         } catch (Exception e) {
+            BorrwoBook();
         }
         
         
@@ -151,12 +152,12 @@ public class library extends libraryStore {
     public void returnBook(){
         boolean bookCondition = true;
         try {
-            System.out.println("return id: \n");
-            int option  = input.nextInt();
+            System.out.println("Please enter the return id: \n");
+            int option  = Integer.parseInt(input.nextLine());
             setInfoOfBook(option);
             checkingBook(userID,id_store, currentBook.id, bookCondition);
         } catch (Exception e) {
-
+            returnBook();
         }
     }
     
@@ -166,8 +167,6 @@ public class library extends libraryStore {
  
     public void getNewBookInfo(){
         
-        currentBook.setBookId();
-        printBreakLine();
         currentBook.setBookTitle();
         printBreakLine();
         currentBook.setBookAuthor();

@@ -82,7 +82,7 @@ public class user extends encryption {
                 userName = input.nextLine();
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            setUsernameForRegistration();
         }
     }
     public void setPasswordForRegistration(){
@@ -93,7 +93,7 @@ public class user extends encryption {
                 userPassword = Hashing(tempPassword);
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            setPasswordForRegistration();
         }
     }
     public void setAddressForRegistration(){
@@ -104,7 +104,7 @@ public class user extends encryption {
 
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            setAddressForRegistration();
         }
     }
     public void setPhoneNumberForRegistration(){
@@ -115,7 +115,8 @@ public class user extends encryption {
 
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            System.out.println("\ninvalid input\n");
+            setPhoneNumberForRegistration();
         }
     }
     public void setUserInfo(ResultSet resultSet){
