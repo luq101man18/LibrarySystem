@@ -86,7 +86,7 @@ public class book {
                 id = Integer.parseInt(input.nextLine());
             }
         } catch (Exception e) {
-            setBookTitle();
+            setBookId();
         }
     }
     public void setBookTitle(){
