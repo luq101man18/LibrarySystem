@@ -3,7 +3,6 @@ import java.util.Scanner;
 import java.security.MessageDigest;
 
 public class encryption {
-    String pass = "";
     Scanner input = new Scanner(System.in);
    
     public String Hashing(String password){
@@ -18,7 +17,7 @@ public class encryption {
             }
             return sb.toString();
         } catch (Exception e) {
-            e.printStackTrace();
+            System.out.println("e.getMessage()");
         }
         return null;
     }

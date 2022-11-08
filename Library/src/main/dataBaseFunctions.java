@@ -27,7 +27,7 @@ public class dataBaseFunctions extends dataBaseConnection {
             return resultSet;
 
         }catch(Exception e){
-            e.getMessage();
+            System.out.println(e.getMessage());;
         }
 
         return null;
@@ -39,7 +39,7 @@ public class dataBaseFunctions extends dataBaseConnection {
             connection = DriverManager.getConnection(DataBase_url, DataBase_username, DataBase_passsword);
             return connection;
         } catch (Exception e) {
-            e.getMessage();
+            System.out.println(e.getMessage());;
         }
         return null;
     }
@@ -58,7 +58,7 @@ public class dataBaseFunctions extends dataBaseConnection {
             }
             System.out.println(); 
         } catch (Exception e) {
-            e.getMessage();
+            System.out.println(e.getMessage());;
         }
     }
    
@@ -70,7 +70,7 @@ public class dataBaseFunctions extends dataBaseConnection {
             connection.close(); 
         
         } catch (Exception e) {
-            e.getMessage();
+            System.out.println(e.getMessage());;
         }
     }
 
@@ -81,7 +81,7 @@ public class dataBaseFunctions extends dataBaseConnection {
             int numberOfColumns = resultSetMetaData.getColumnCount();
             printData(resultSet, resultSetMetaData, numberOfColumns);
         }catch(Exception e){
-            e.printStackTrace();
+            System.out.println(e.getMessage());;
         }
 
 
@@ -93,7 +93,7 @@ public class dataBaseFunctions extends dataBaseConnection {
             int numberOfColumns = resultSetMetaData.getColumnCount();
             printDataForSecondVersionGetData(resultSet, resultSetMetaData, numberOfColumns);
         }catch(Exception e){
-            e.printStackTrace();
+            System.out.println(e.getMessage());;
         }
 
 
@@ -116,7 +116,7 @@ public class dataBaseFunctions extends dataBaseConnection {
             }
             System.out.println(); 
         } catch (Exception e) {
-            e.getMessage();
+            System.out.println(e.getMessage());;
         }
     }
     public Statement creatingStatement(){
@@ -124,7 +124,7 @@ public class dataBaseFunctions extends dataBaseConnection {
             statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
             return statement;
         } catch (Exception e) {
-            e.printStackTrace();
+            System.out.println(e.getMessage());;
         }
         return null;
     }
@@ -135,7 +135,7 @@ public class dataBaseFunctions extends dataBaseConnection {
                 resultSet = preparedStatement.executeQuery();
                 return resultSet;
             }catch(Exception e){
-                e.getMessage();
+                System.out.println(e.getMessage());;
             }
             return null;
     }
@@ -146,7 +146,7 @@ public class dataBaseFunctions extends dataBaseConnection {
             resultSet = preparedStatement.executeQuery();
             return resultSet;
         }catch(Exception e){
-            e.getMessage();
+            System.out.println(e.getMessage());;
         }
         return null;
     }
@@ -158,7 +158,7 @@ public class dataBaseFunctions extends dataBaseConnection {
             resultSet = preparedStatement.executeQuery();
             return resultSet;   
         }catch(Exception e){
-            e.getMessage();
+            System.out.println(e.getMessage());;
         }
         return null;
     }
@@ -169,7 +169,7 @@ public class dataBaseFunctions extends dataBaseConnection {
             resultSet = preparedStatement.executeQuery();
             return resultSet;
         }catch(Exception e){
-            e.getMessage();
+            System.out.println(e.getMessage());;
         }
         return null;
     }
@@ -183,7 +183,7 @@ public class dataBaseFunctions extends dataBaseConnection {
     
             return resultSet;
         }catch(Exception e){
-            e.printStackTrace();
+            System.out.println(e.getMessage());;
         }
         return null;
     }
@@ -202,7 +202,7 @@ public class dataBaseFunctions extends dataBaseConnection {
                 return false;
             }
         }catch(Exception e){
-            e.printStackTrace();
+            System.out.println(e.getMessage());;
         }
         return false;
     }
@@ -220,7 +220,7 @@ public class dataBaseFunctions extends dataBaseConnection {
                 System.out.println("stuck somewhere");
             }
         }catch(Exception e){
-            e.getMessage();
+            System.out.println(e.getMessage());;
         }
     }
     public void createPrepareStatementtoUpdate(String querytoExecute, String value1, String vlaue2, String value3, int value4){
@@ -238,7 +238,7 @@ public class dataBaseFunctions extends dataBaseConnection {
                 System.out.println("stuck somewhere");
             }
         }catch(Exception e){
-            e.printStackTrace();
+            System.out.println(e.getMessage());;
         }
     }
     public void createPrepareStatementtoUpdate(String querytoExecute, int value1, int vlaue2, int value3, int value4){
@@ -255,7 +255,7 @@ public class dataBaseFunctions extends dataBaseConnection {
                 System.out.println("stuck somewhere");
             }
         }catch(Exception e){
-            e.getMessage();
+            System.out.println(e.getMessage());;
         }
     }
     public void createPrepareStatementtoUpdate(String querytoExecute, int value1, String vlaue2, String value3, String value4){
@@ -272,7 +272,7 @@ public class dataBaseFunctions extends dataBaseConnection {
                 System.out.println("stuck somewhere");
             }
         }catch(Exception e){
-            e.getMessage();
+            System.out.println(e.getMessage());;
         }
     }
     public boolean createPrepareStatement(String query, int value1, int value2, int value3, String dateTime, String returned){
@@ -294,7 +294,7 @@ public class dataBaseFunctions extends dataBaseConnection {
             }
             
         }catch(Exception e){
-            e.printStackTrace();
+            System.out.println(e.getMessage());;
         }
         return false;
     }
@@ -321,7 +321,7 @@ public class dataBaseFunctions extends dataBaseConnection {
                 return false;
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            System.out.println(e.getMessage());;
         }
         return false;
     }
@@ -333,7 +333,7 @@ public class dataBaseFunctions extends dataBaseConnection {
                 return data;
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            System.out.println(e.getMessage());;
         }
         return 0;
     }

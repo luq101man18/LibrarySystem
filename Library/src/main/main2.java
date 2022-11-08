@@ -100,7 +100,7 @@ public class main2 extends dataBaseFunctions{
             }
             
         } catch (Exception e) {
-            e.printStackTrace();
+            e.getMessage();
         }
 
     }

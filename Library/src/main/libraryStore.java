@@ -30,7 +30,7 @@ public class libraryStore extends dataBaseFunctions{
         try {
             getDataToPrint("Select * from libraryStore");
         } catch (Exception e) {
-            e.getMessage();
+            System.out.println(e.getMessage());;
         }
     }
 
@@ -44,7 +44,7 @@ public class libraryStore extends dataBaseFunctions{
                 id_store = resultSet.getInt("id");
             }
         } catch (Exception e) {
-            e.getMessage();
+            System.out.println(e.getMessage());;
         }
     }
 
@@ -64,7 +64,7 @@ public class libraryStore extends dataBaseFunctions{
         }catch (NoSuchElementException elementException) {
             invalidInput(id_store);
         }catch(Exception e){
-            e.getMessage();
+            System.out.println(e.getMessage());;
         }
     }
 

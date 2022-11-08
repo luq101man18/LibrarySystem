@@ -28,7 +28,7 @@ public class library extends libraryStore {
             printData(resultSet, resultSetMetaData, numberOfColumns);
             
         } catch (Exception e) {
-            e.getMessage();
+            System.out.println(e.getMessage());;
         }
         
     }
@@ -65,7 +65,7 @@ public class library extends libraryStore {
             }
             System.out.println(currentBook.bookInfo());
         }catch (Exception e) {
-            e.getMessage();
+            System.out.println(e.getMessage());;
         }
        
     }
@@ -144,7 +144,7 @@ public class library extends libraryStore {
                 System.out.println("Couldn't find book\n\n");
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            System.out.println(e.getMessage());;
         }
     }
     
@@ -192,7 +192,7 @@ public class library extends libraryStore {
             }
             if (stock > 0 || returned) return true;
         } catch (Exception e) {
-            e.getMessage();
+            System.out.println(e.getMessage());;
         }
         return false;
     }
@@ -212,7 +212,7 @@ public class library extends libraryStore {
                 return false;
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            System.out.println(e.getMessage());;
         }
 
         return false;
@@ -255,7 +255,7 @@ public class library extends libraryStore {
                     return true;
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            System.out.println(e.getMessage());
         }
         return false;
     }
@@ -272,7 +272,7 @@ public class library extends libraryStore {
                     return true;
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            System.out.println(e.getMessage());
         }
         return false;
     }
